@@ -1,0 +1,1 @@
+angular.module("pedidosWeb", ["ngMessages", "angular-table", "angular-tabs", "ngTable", "ngRoute" , "angularUtils.directives.dirPagination", "ngCookies", "ngStorage"]);

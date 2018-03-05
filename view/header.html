@@ -1,0 +1,35 @@
+<header class="main-header" ng-controller="HeaderCtrl">
+    <a href ng-click="home()" class="logo" style="width:20%; background:transparent;">
+        <span class="logo-mini"></span>
+       <h4 style="color: rgb(233,233,233); font-weight: bold !important; font-size: 1em !important; text-align: left; text-shadow: 0 1px 0 #ccc, 0 2px 0 #c9c9c9, 0 2px 0 #bbb, 0 3px 0 #b9b9b9, 0 3px 0 #aaa, 0 6px 1px rgba(0,0,0,.1), 0 18px 20px rgba(0,0,0,.1);">G3 Pedidos Web</h4>
+    </a>
+    <nav class="navbar navbar-static-top" role="navigation" style="height:100px;">
+
+        <div class="navbar-custom-menu" ng-click="active=active?true:false" ng-init="active=false" ng-blur="active=false">
+            <ul class="nav navbar-nav" style="white-space: nowrap; margin-right: 50px;">
+                <li class="dropdown user user-menu" ng-class="active != true ? '' : 'open'">
+                <a href class="dropdown-toggle" data-toggle="dropdown">
+                    <img src="img/avatar.png" class="user-image" alt="User Image">              
+                    <span class="hidden-xs" id="nomeCliente">{{cliente.NOME_CC}}</span>
+                </a>
+                    <ul class="dropdown-menu" style="background: #f0fcff !important; border: 10px solid #3C8DBC;">
+                        <li class="user-header">
+                            <img src="img/avatar.png" class="img-circle" alt="User Image"> 
+                            <p id="nomeClienteBaixo">Cliente Teste</p>
+                        </li>
+                        <li class="user-footer">
+                            <div class="pull-left">
+                                <a href ng-click="AlteraSenha()" class="btn btn-default btn-flat">Alterar Senha</a>
+                            </div>
+                            <div class="pull-right">
+                                <a href ng-click="sair()" class="btn btn-default btn-flat">Sair</a>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>
+
+           

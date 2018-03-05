@@ -1,0 +1,55 @@
+<html ng-app="pedidosWeb">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=100%, initial-scale=1">
+	<link rel="icon" type="image/png" href="img/icone.png" />
+	<title>G3 Pedidos Web</title>
+	<link rel="stylesheet" type="text/css" href="lib/bootstrap/bootstrap.css?v1.05">
+	<link rel="stylesheet" type="text/css" href="css/style.css?v1.05">
+	<link rel="stylesheet" type="text/css" href="css/main.css?v1.05">
+	<link rel="stylesheet" type="text/css" href="css/ui.css?v1.05">
+	<link rel="stylesheet" type="text/css" href="fonts/font-awesome/css/font-awesome.css?v1.05">
+	<link rel="stylesheet" href="https://unpkg.com/ng-table@2.0.2/bundles/ng-table.min.css?v1.05">
+	<link rel="stylesheet" href="lib/w3/w3.css?v1.05">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js?v1.05"></script>
+	<script src="lib/angular/angular.js?v1.05"></script>
+	<script src="lib/angular/angular-messages.js?v1.05"></script>
+	<script src="https://unpkg.com/ng-table@2.0.2/bundles/ng-table.min.js?v1.05"></script>
+	<script src="lib/angular/angular-tables.min.js?v1.05"></script>
+	<script src="lib/angular/angular-tabs.min.js?v1.05"></script>
+	<script src="lib/angular/angular-cookies.js?v1.05"></script>
+	<script src="lib/angular/ngStorage.min.js?v1.05"></script>
+	<script defer src="lib/fonts/font-awesome/svg-with-js/js/fontawesome-all.js"></script>
+
+
+	
+	<script src="js/app.js?v1.05"></script>
+	<script src="js/controllers/HeaderCtrl.js?v1.05"></script>
+	<script src="js/controllers/pedidosWebCtrl.js?v1.05"></script>
+	<script src="js/controllers/HomeCtrl.js?v1.05"></script>
+	<script src="js/services/produtosAPIService.js?v1.05"></script>
+	<script src="js/value/configValue.js?v1.05"></script>
+	<script src="js/controllers/tableCtrl.js?v1.05"></script>
+	<script src="js/routes/routes.js?v1.05"></script>
+	<script src="lib/angular/angular-route.min.js?v1.05"></script>
+	<script src="js/controllers/LoginCtrl.js?v1.05"></script>
+	<script src="js/controllers/ProdutosCtrl.js?v1.05"></script>
+	<script src="js/controllers/AlterarSenhaCtrl.js?v1.05"></script>
+	<script src="js/controllers/PedidosCtrl.js?v1.05"></script>
+	<script src="http://bootstrapdocs.com/v3.1.1/docs/dist/js/bootstrap.min.js?v1.05"></script>
+	<script src="lib/angular/angular-pagination.js?v1.05"></script>
+	<script src="js/services/clienteAPIService.js?v1.05"></script>
+	<script src="js/services/pedidosAPiService.js?v1.05"></script>
+	<script src="js/services/AuthenticationService.js?v1.05"></script>
+	<script src="js/controllers/ControleRHCtrl.js?v1.05"></script>
+
+</head>
+<body ng-controller="pedidosWebCtrl">
+	<div class="versao" ">v1.05</div>
+	<div class="container" id="container" ng-view="conteudo" style="width: 100%; padding: 0px;">
+
+	</div>
+	
+</body>
+</html>
+

@@ -1,0 +1,45 @@
+<div ng-include="'view/header.html'"></div>
+	<div ng-include="'view/aside.html'"></div>
+	<div class="content">
+		<section class="content ng-scope" style="width: 70%; margin-right: 8%; float: right; background: rgba(240,252,255,0.4); margin-top: 3%;">	
+	<div class="box box-primary" style="min-width: 500px; padding: 15px;">
+		<h3>{{app}}</h3>
+		<input class="form-control" type="text" ng-model="criterioDeBusca" placeholder="O que você está buscando?"/>
+		<div class="row ng-scope" ng-controller="tableCtrl">
+		     <div class="col-md-12">
+				<table  class="table table-striped">
+					<tr>
+						<th ng-click="ordenacao('COD_MATERIAL')">Cód</a></th>
+						<th ng-click="ordenacao('NOME_MATERIAL')">Descrição</a></th>
+						<th ng-click="ordenacao('NOME_FABRICANTE')">Fabricante</th>
+						<th ng-click="ordenacao('QTDE_ESTOQUE')">Estoque</th>
+						<th ng-click="ordenacao('NOME_UNIDADE')">U.N.</th>
+						<th ng-click="ordenacao('preco')">Preço Unitário</th>
+					</tr>
+					<tr dir-paginate="produto in produtos | filter:criterioDeBusca | orderBy:sortKey:reverse |  itemsPerPage:totalporpagina" ng-class="{'selecionado negrito': produto.selecionado}" >
+						<td>{{produto.COD_MATERIAL}}</td>
+						<td>{{produto.NOME_MATERIAL}}</td>
+						<td>{{produto.NOME_FABRICANTE}}</td>
+						<td>{{produto.QTDE_ESTOQUE}}</td>
+						<td>{{produto.NOME_UNIDADE}}</td>
+						<td style="float: right; margin-right: 35px;">R${{produto.preco}}</td>		
+					</tr>
+				</table> 
+				<div class="row">
+					
+					<div class="col-lg-12">
+						<dir-pagination-controls
+							max-size="5"
+							boundary-links="true"
+							direction-links="true"
+							auto-hide="true"
+							template-url="view/pagination.html"
+						></dir-pagination-controls>
+
+					</div>
+			</div>
+		</div>
+	</div>
+</section>
+</div>
+	<div ng-include="'view/footer.html'"></div>

@@ -1,0 +1,32 @@
+<div ng-include='"view/header.html"'></div>
+<div ng-include='"view/aside.html"'></div>
+<section class="content" style="width: 50%; background: rgba(240,252,255,0.4); margin-top: 3%;" ng-controller="AlterarSenhaCtrl">
+	<div class="box box-primary">
+		<form>
+			<div class="box-body">
+				<h3>Alterar Senha</h3>
+				<div class="row">
+					<div class="col-md-12">
+						<div class="form-group inputAlteraSenha">
+							<label>Senha Atual</label>
+							<input autofocus="" class="form-control" style="text-align: left;" tabindex="2" type="PASSWORD" ng-model="senhaAtual">
+						</div>
+						<div class="form-group inputAlteraSenha">
+							<label>Nova Senha</label>
+							<input class="form-control" style="text-align: left;" tabindex="3" type="PASSWORD" ng-model="novaSenha">
+						</div>
+						<div class="form-group inputAlteraSenha">
+							<label>Confirma Nova Senha</label>
+							<input class="form-control" style="text-align: left;" tabindex="4" type="PASSWORD" ng-model="confirmaNovaSenha" ng-keyup="$event.keyCode == 13 && alterarSenha(senhaAtual, novaSenha, confirmaNovaSenha)">
+						</div>
+						<div class="box-footer" style="    background: #f0fcff !important;">
+							<input class="btn btn-success w3-margin btnWidth" type="button" value="Salvar Senha" ng-click="alterarSenha(senhaAtual, novaSenha, confirmaNovaSenha)">
+							<input class="btn btn-warning w3-margin btnWidth w3-right" ng-click="home()" tabindex="5" type="button" value="Cancelar">
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+</section>
+<div ng-include='"view/footer.html"'></div>

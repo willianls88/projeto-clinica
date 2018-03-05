@@ -1,0 +1,245 @@
+<div ng-include='"view/header.html"'></div>
+<div ng-include='"view/aside.html"'></div>
+<section class="content" style="width: 80%; float: right; background: rgba(240,252,255,0.4); margin-top: 3%;" ng-controller="PedidosCtrl">	
+    <div class="box box-primary">
+		<div class="container" style="overflow: auto;">
+			<h3>Meus Pedidos</h3>
+			<div class="col-sm-12 w3-margin-top w3-margin-bottom" style="margin-bottom: 15px;">  
+				<button focus-index="1" class="btn btn-success" data-toggle="modal" focus-element="autofocus" data-target=".bs-example-modal-lg" ng-click="criarPedido()">		<i class="fa fa-cart-plus"> </i>  
+					<span> Criar Pedido</span></button>
+			</div>	
+			<div class="col-sm-12" style="width: 95%;">  
+				<table ng-show="pedidos.length > 0" class="table table-striped" style="width: 95%; margin: auto;">
+					<tr>
+						<th ng-click="ordenacao('cod_venda')">Cód</th>
+						<th ng-click="ordenacao('NOME_STATUS')">Status</th>
+						<th ng-click="ordenacao('DTC_PEDIDO')">Data Criação</th>
+						<th ng-click="ordenacao('QTDE_ITENS_PEDIDO')">Qtde Itens</th>
+						<th ng-click="ordenacao('VALOR_TOTAL_PEDIDO')">Valor Total</th>
+						<th>Opções</th>
+					</tr>
+					<tr dir-paginate="pedido in pedidos | filter:criterioDeBusca | orderBy:sortKey:reverse |  itemsPerPage:totalporpagina" style="cursor:pointer;" ng-click="editarPedido(pedido.cod_venda)" data-toggle="modal" focus-element="autofocus" data-target=".bs-example-modal-lg" pagination-id="paginate2">
+						<td>{{pedido.cod_venda}}</td>
+						<td>{{pedido.NOME_STATUS}}</td>
+						<td>{{pedido.DTC_PEDIDO}}</td>
+						<td>{{pedido.QTDE_ITENS_PEDIDO}}</td>
+						<td>{{pedido.VALOR_TOTAL_PEDIDO}}</td>
+						<td><i class="fa fa-pencil" ng-if="pedido.NOME_STATUS == 'Em Aberto'" style="padding-left: 10px; font-size: 16px; cursor:pointer;" ng-click="editarPedido(pedido.cod_venda)"> </i>  <i class="fa fa-trash" ng-if="pedido.NOME_STATUS == 'Em Aberto'" style="padding-left: 10px; font-size: 16px; cursor:pointer;" ng-click="inativarPedido(pedido.cod_venda)"></i> <i class="fa fa-search" ng-if="pedido.NOME_STATUS == 'Fechado'" style="padding-left: 10px; font-size: 16px; cursor:pointer;" ng-click="inativarPedido(pedido.cod_venda)"></i></td>
+					</tr>
+				</table> 
+				<div class="row">
+					<div class="col-lg-12">
+						<dir-pagination-controls on-page-change="pageChangeHandler(newPageNumber)" pagination-id="paginate2" max-size="5" boundary-links="true" direction-links="true" auto-hide="true" template-url="view/paginationPedidos.html"
+						></dir-pagination-controls>
+					</div>
+				</div>
+			</div>					
+		</div>
+	</div>
+		<!-- Modal -->
+		<div class="modal fade bs-example-modal-lg"  id="modalPedido" focus-group focus-group-head="loop" focus-group-tail="loop" focus-stacktabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+			<div style="width:100%; height:100%; position: absolute;">
+			<div class="modal-dialog" id="modal-editar-chamado" style="width: 88%;">
+				<!-- Modal content-->
+				<div class="modal-content" style="height: 90%;">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title" id="Titulo">Editar Pedido</h4>
+					</div>
+					<div class="modal-body">
+						<div class="tab" style="width: 60%;">
+  							<button class="tablinks active" onclick="openCity(event, 'Cliente')">Dados do Cliente</button>
+  							<button class="tablinks" onclick="openCity(event, 'Produto')">Produtos</button>
+  							<button class="tablinks" onclick="openCity(event, 'Pagamento')">Dados Pagamento</button>
+						</div>
+						<div id="Cliente" class="tabcontent" style="display: block;">
+							<div class="w3-row">
+								<div class="w3-half">
+									<div class="form-group-pedido">
+										<label for="id_cliente">Nome do Cliente</label>
+										<input type="text" class="form-control" ng-model="cliente.NOME_CC" readonly>
+									</div>
+									<div class="form-group-pedido">
+										<label for="id_cliente">CEP</label>
+										<input type="text" class="form-control" ng-model="cliente.CEP_ENDERECO_CLIENTE" readonly>
+									</div>
+									<div class="form-group-pedido">
+										<label for="id_cliente">Endereço</label>
+										<input type="text" class="form-control" ng-model="cliente.ENDERECO_CLIENTE" readonly>
+									</div>
+									<div class="form-group-pedido">
+										<label for="id_cliente">Bairro</label>
+										<input type="text" class="form-control" ng-model="cliente.BAIRRO_ENDERECO_CLIENTE" readonly>
+									</div>
+									<div class="form-group-pedido">
+										<label for="id_cliente">UF</label>
+										<input type="text" class="form-control" ng-model="cliente.UF_ENDERECO_CLIENTE" readonly>
+									</div>
+								</div>
+								<div class="w3-half">
+									<div class="form-group-pedido">
+										<label for="id_cliente">CPF/CNPJ</label>
+										<input type="text" class="form-control" ng-model="cliente.ID_NACIONAL_CLIENTE" readonly>
+									</div>
+									<div class="form-group-pedido">
+										<label for="id_cliente">Telefone</label>
+										<input type="text" class="form-control" ng-model="cliente.TELEFONE_CLIENTE" readonly>
+									</div>
+									<div class="form-group-pedido">
+										<label for="id_cliente">Número</label>
+										<input type="text" class="form-control" ng-model="cliente.NUMERO_ENDERECO_CLIENTE" readonly>
+									</div>
+									<div class="form-group-pedido">
+										<label for="id_cliente">Cidade</label>
+										<input type="text" class="form-control" ng-model="cliente.CIDADE_ENDERECO_CLIENTE" readonly>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div id="Produto" class="tabcontent">
+							<div class="col-sm-12 w3-margin-top w3-margin-bottom" style="margin-bottom: 15px;">  
+							<button focus-index="1" class="btn btn-success" ng-click="adicionarProduto(); openCity(event, 'Cliente');">
+								<i class="fa fa-cart-plus"> </i>  
+								<span> Adicionar Produto</span></button>
+							</div>
+							<div class="w3-row w3-half w3-right">
+								<input class="form-control" type="text" ng-model="criterioDeBusca" placeholder="O que você está buscando?"/>	
+							</div>
+							<div class="row">
+	        					<table class="table table-striped table-responsive" style="width: 95%; margin: 20px;">
+									<thead>
+										<tr>
+											<th ng-click="ordenacao('COD_MATERIAL')">Cód</th>
+											<th ng-click="ordenacao('NOME_MATERIAL')">Descrição</th>
+											<th ng-click="ordenacao('NOME_FABRICANTE')">Fabricante</th>
+											<th ng-click="ordenacao('QTDE_ESTOQUE')">Estoque</th>
+											<th ng-click="ordenacao('NOME_UNIDADE')">U.N.</th>
+											<th ng-click="ordenacao('preco')">Preço Unitário</th>
+											<th ng-click="ordenacao('quantidade')">Qtde</th>
+											<th ng-click="ordenacao('precoTotal')">Preço Total</th>
+											<th>Opções</th>
+										</tr>
+									</thead>
+									<tbody ng-init="total = 0">
+										<tr dir-paginate="produto in produtosPedido | filter:criterioDeBusca | orderBy:sortKey:reverse |  itemsPerPage:totalporpagina track by $index" ng-class="{'selecionado negrito': produto.selecionado}" pagination-id="paginate1"  >
+											<td>{{produto.COD_MATERIAL}}</td>
+											<td>{{produto.NOME_MATERIAL}}</td>
+											<td>{{produto.NOME_FABRICANTE}}</td>
+											<td>{{produto.QTDE_ESTOQUE}}</td>
+											<td>{{produto.NOME_UNIDADE}}</td>
+											<td>R${{produto.preco}}</td>		
+											<td>
+												<input type="text" class="form-control inputQtde" ng-model="produto.quantidade" ng-blur="totalProduto(produto)" ng-value="1">
+											</td>	
+											<td>R${{produto.precoTotal}}</td>	
+											<td style="font-size: 1.3em; color: red; cursor: pointer;">
+												<i class="fa fa-trash" ng-click="deletaProduto(produtosPedido, produto);" > </i> 
+
+											</td>
+										</tr>
+									</tbody>
+								</table>
+								<div class="row">
+									<div style="margin-left:40px;">Valor Total do Pedido: R$ {{totalPedido | number : 2}}</div>
+									<div class="col-lg-12">
+										<dir-pagination-controls on-page-change="pageChangeHandler(newPageNumber)" pagination-id="paginate1" max-size="5" boundary-links="true" direction-links="true" auto-hide="true" template-url="view/pagination.html">
+										</dir-pagination-controls>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div id="Pagamento" class="tabcontent">
+							<div class="form-group-pedido">
+								<label for="id_cliente">Valor Total do Pedido</label>
+									R$ {{totalPedido | number : 2}}
+								</div>
+							<div class="w3-group" id="edtMensagem">
+								<label id="edtMensagemLabel" class="w3-label w3-text-black">Observação do Pedido</label>
+								<textarea ng-model="observacao" wrap="soft" class="w3-input observacao" style="border: 1px solid #808080;"></textarea>
+							</div>
+							<div class="w3-group" style="margin-bottom: 15px;">  
+								<div class="w3-row w3-margin">
+									<div class="w3-third">
+										<input class="btn btn-success teste" style="width: 80%;" tabindex="17" type="button" value="Salvar Pedido" ng-click="enviarPedido(observacao, produtos, totalPedido)">
+									</div>
+									<div class="w3-third">
+										<input class="btn btn-info teste" style="width: 80%; cursor: default;" tabindex="18" type="button" value="Salvar e Enviar Pedido">
+									</div>
+									<div class="w3-third">
+										<input class="btn btn-danger teste" focus-element="autofocus" data-dismiss="modal" style="width: 80%;" tabindex="19" type="button" value="Cancelar">
+									</div>
+								</div>	
+							</div>
+						</div>
+					</div>
+				</div>	
+			</div>
+		</div>
+			</div>
+			<div id="divBlock" class="" style="display:none; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); left: 0px; top: 0px; position: absolute; z-index: 999999;">
+				<div id="divBox" class ="container-fluid w3-padding w3-example">
+					<div class="modal-header">
+						<button type="button" class="close" ng-click="cancelarAddProduto();">×</button>
+						<h4 class="modal-title" id="Titulo">Adicionando produto ao pedido</h4>
+					</div>
+					
+						<div class="w3-row w3-half">
+								<input class="form-control inputBusca" type="text" ng-model="criterioDeBusca" placeholder="O que você está buscando?"/>	
+							</div>
+							<div class="row">
+	        					<table ng-show="produtos.length > 0" class="table table-striped table-responsive table-hover" style="width: 95%; margin: 20px;">
+									<thead>
+										<tr>
+											<th ng-click="ordenacao('COD_MATERIAL')">Cód</th>
+											<th ng-click="ordenacao('NOME_MATERIAL')">Descrição</th>
+											<th ng-click="ordenacao('NOME_FABRICANTE')">Fabricante</th>
+											<th ng-click="ordenacao('QTDE_ESTOQUE')">Estoque</th>
+											<th ng-click="ordenacao('NOME_UNIDADE')">U.N.</th>
+											<th ng-click="ordenacao('preco')">Preço Unitário</th>
+										</tr>
+									</thead>
+									<tbody ng-init="total = 0">
+										<tr dir-paginate="produto in produtos | filter:criterioDeBusca | orderBy:sortKey:reverse |  itemsPerPage:totalporpagina" ng-class="{'selecionado negrito': produto.selecionado}" ng-click="selecionaProduto(produto);" style="cursor:pointer;" pagination-id="paginate3" >
+											<td>{{produto.COD_MATERIAL}}</td>
+											<td>{{produto.NOME_MATERIAL}}</td>
+											<td>{{produto.NOME_FABRICANTE}}</td>
+											<td>{{produto.QTDE_ESTOQUE}}</td>
+											<td>{{produto.NOME_UNIDADE}}</td>
+											<td>R${{produto.preco}}</td>		
+										
+										</tr>
+									</tbody>
+								</table>
+								<div class="row">
+									<div class="col-lg-12">
+										<dir-pagination-controls on-page-change="pageChangeHandler(newPageNumber)" pagination-id="paginate3" max-size="5" boundary-links="true" direction-links="true" auto-hide="true" template-url="view/pagination.html">
+										</dir-pagination-controls>
+									</div>
+								</div>
+							</div>
+								<div class="w3-third" style="bottom: 0; width: 100%; float: right; text-align: right; padding-bottom: 1%;">
+										<input class="btn btn-danger teste" style="width: 20%; margin-top: 50px;" type="button" value="Cancelar" ng-click="cancelarAddProduto();">
+									</div>
+					
+					</div>
+				</div>
+
+</section>	
+	<script type="text/javascript">
+		function openCity(evt, cityName) {
+    	var i, tabcontent, tablinks;
+    	tabcontent = document.getElementsByClassName("tabcontent");
+    	for (i = 0; i < tabcontent.length; i++) {
+        	tabcontent[i].style.display = "none";
+    	}
+    	tablinks = document.getElementsByClassName("tablinks");
+    	for (i = 0; i < tablinks.length; i++) {
+        	tablinks[i].className = tablinks[i].className.replace(" active", "");
+    	}
+    	document.getElementById(cityName).style.display = "block";
+    	evt.currentTarget.className += " active";
+		}
+	</script>
+	<div ng-include='"view/footer.html"'></div>
+
+
